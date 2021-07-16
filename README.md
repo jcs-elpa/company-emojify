@@ -4,6 +4,24 @@
 # company-emojify
 > Company completion for Emojify
 
+## Features
+
+* Uses [emojify](https://github.com/iqbalansari/emacs-emojify)
+* Support both `unicode` and `image` displays
+
+## :floppy_disk: Quickstart
+
+```el
+(require 'company-emojify)
+(add-to-list 'company-backends 'company-emoji)
+```
+
+## :hammer: Basic
+
+#### `company-emojify-display`
+
+
+
 ## Contribution
 
 If you would like to contribute to this project, you may either
