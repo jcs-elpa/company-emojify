@@ -16,7 +16,7 @@
 (add-to-list 'company-backends 'company-emoji)
 ```
 
-## :hammer: Basic
+## :hammer: Configuration
 
 #### `company-emojify-display`
 
@@ -26,6 +26,16 @@ Option to display emoji in annotation. It can either be one of the following val
 * `image`
 
 Notice, it will display `unicode` if you are in non-graphical environment (terminal).
+
+## :question: FAQ
+
+#### :dizzy: How is this different from [company-emoji](https://github.com/dunn/company-emoji)?
+
+`company-emoji` is more lightweight and does not require [emojify](https://github.com/iqbalansari/emacs-emojify).
+However, it does not support display with emoji images. `company-emoji` would work
+on its own since it declares its emoji list in [company-emoji-let.el](https://github.com/dunn/company-emoji/blob/trunk/company-emoji-list.el)
+This package reuses the code from `emojify` hence this would be a better
+choice if you already have `emojify` installed.
 
 ## Contribution
 

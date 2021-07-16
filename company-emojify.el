@@ -108,15 +108,11 @@ is the selected one."
           display)
       "")))
 
-(defun company-emojify--candidates (prefix)
-  "Return a list of valid candidates.
-
-Argument PREFIX is used to eliminate possible candidates hence this should
-save some performance."
+(defun company-emojify--candidates ()
+  "Return a list of valid candidates."
   (let ((user (when (hash-table-p emojify--user-emojis) (ht-keys emojify--user-emojis)))
         (const (when (hash-table-p emojify-emojis) (ht-keys emojify-emojis))))
-    (cl-remove-if-not (lambda (c) (string-prefix-p prefix c))
-                      (append user const))))
+    (append user const)))
 
 ;;
 ;; (@* "Entry" )
@@ -132,7 +128,7 @@ Arguments COMMAND, ARG and IGNORED are standard arguments from `company-mode`."
   (cl-case command
     (interactive (company-begin-backend 'company-emojify))
     (prefix (company-grab "\:[a-zA-Z0-9-_+]*"))
-    (candidates (company-emojify--candidates arg))
+    (candidates (company-emojify--candidates))
     (annotation (company-emojify--annotation arg))))
 
 (provide 'company-emojify)
