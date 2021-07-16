@@ -45,7 +45,7 @@
   :link '(url-link :tag "Repository" "https://github.com/jcs-elpa/company-emojify"))
 
 (defcustom company-emojify-display 'unicode
-  "Option to display emoji annotation."
+  "Option to display emoji in annotation."
   :type '(choice (const :tag "Display with unicode" unicode)
                  (const :tag "Display with image" image))
   :group 'company-emojify)
