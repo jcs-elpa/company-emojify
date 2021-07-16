@@ -7,7 +7,7 @@
 ;; Description: Company completion for Emojify
 ;; Keyword: emoji company emojify
 ;; Version: 0.1.0
-;; Package-Requires: ((emacs "25.1") (company "0.8.0") (emojify "1.2.1") (ht "2.0"))
+;; Package-Requires: ((emacs "26.1") (company "0.8.0") (emojify "1.2.1") (ht "2.0"))
 ;; URL: https://github.com/jcs-elpa/company-emojify
 
 ;; This file is NOT part of GNU Emacs.
@@ -55,7 +55,10 @@
   (and (display-graphic-p) (eq company-emojify-display 'image)))
 
 (defun company-emojify--display-image (file selected)
-  "Display emoji icon in annotation."
+  "Display emoji icon in annotation.
+
+FILE is the emoji png file.  If SELECTED is non-nil means the current candidate
+is the selected one."
   (when-let* ((image-file (expand-file-name file (emojify-image-dir)))
               (_exists (file-exists-p image-file))
               (bkg (face-attribute (if selected
