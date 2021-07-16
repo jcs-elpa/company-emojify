@@ -32,7 +32,7 @@
 
 ;;; Code:
 
-(require 'subr-x)
+(require 'cl-lib)
 
 (require 'company)
 (require 'emojify)
@@ -59,36 +59,37 @@
 
 FILE is the emoji png file.  If SELECTED is non-nil means the current candidate
 is the selected one."
-  (when-let* ((image-file (expand-file-name file (emojify-image-dir)))
-              (_exists (file-exists-p image-file))
-              (bkg (face-attribute (if selected
-                                       'company-tooltip-selection
-                                     'company-tooltip)
-                                   :background))
-              (dfw (default-font-width))
-              (icon-size (cond
-                          ((integerp company-icon-size)
-                           company-icon-size)
-                          ;; XXX: Also consider smooth scaling, e.g. using
-                          ;; (aref (font-info (face-font 'default)) 2)
-                          ((and (consp company-icon-size)
-                                (eq 'auto-scale (car company-icon-size)))
-                           (let ((base-size (cdr company-icon-size))
-                                 (dfh (default-font-height)))
-                             (min
-                              (if (> dfh (* 2 base-size))
-                                  (* 2 base-size)
-                                base-size)
-                              (* 2 dfw))))))
-              (spec (list 'image
-                          :file image-file
-                          :type 'png
-                          :width icon-size
-                          :height icon-size
-                          :ascent 'center
-                          :background (unless (eq bkg 'unspecified)
-                                        bkg))))
-    (propertize "-" 'display spec)))
+  (let ((image-file (expand-file-name file (emojify-image-dir)))
+        bkg dfw icon-size spec)
+    (when (file-exists-p image-file)
+      (setq bkg (face-attribute (if selected
+                                    'company-tooltip-selection
+                                  'company-tooltip)
+                                :background)
+            dfw (default-font-width)
+            icon-size (cond
+                       ((integerp company-icon-size)
+                        company-icon-size)
+                       ;; XXX: Also consider smooth scaling, e.g. using
+                       ;; (aref (font-info (face-font 'default)) 2)
+                       ((and (consp company-icon-size)
+                             (eq 'auto-scale (car company-icon-size)))
+                        (let ((base-size (cdr company-icon-size))
+                              (dfh (default-font-height)))
+                          (min
+                           (if (> dfh (* 2 base-size))
+                               (* 2 base-size)
+                             base-size)
+                           (* 2 dfw)))))
+            spec (list 'image
+                       :file image-file
+                       :type 'png
+                       :width icon-size
+                       :height icon-size
+                       :ascent 'center
+                       :background (unless (eq bkg 'unspecified)
+                                     bkg)))
+      (propertize "-" 'display spec))))
 
 (defun company-emojify--annotation (candidate)
   "Return annotation for completion CANDIDATE."
