@@ -30,7 +30,7 @@ Notice, it will display `unicode` if you are in non-graphical environment (termi
 
 #### `company-emojify-document`
 
-Display information about the emoji in document buffer.
+Display information about the emoji in document buffer, default to `t`.
 
 ## :question: FAQ
 
