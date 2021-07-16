@@ -107,7 +107,8 @@ Argument PREFIX is used to eliminate possible candidates hence this should
 save some performance."
   (let ((user (when (hash-table-p emojify--user-emojis) (ht-keys emojify--user-emojis)))
         (const (when (hash-table-p emojify-emojis) (ht-keys emojify-emojis))))
-    (append user const)))
+    (cl-remove-if-not (lambda (c) (string-prefix-p prefix c))
+                      (append user const))))
 
 ;;;###autoload
 (defun company-emojify (command &optional arg &rest ignored)
