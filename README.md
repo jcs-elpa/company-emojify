@@ -18,14 +18,19 @@
 
 ## :hammer: Configuration
 
-#### `company-emojify-display`
+#### `company-emojify-annotation`
 
 Option to display emoji in annotation. It can either be one of the following values,
 
-* `unicode`  (default)
-* `image`
+* `nil`
+* `unicode`
+* `image`  (default)
 
 Notice, it will display `unicode` if you are in non-graphical environment (terminal).
+
+#### `company-emojify-document`
+
+Display information about the emoji in document buffer.
 
 ## :question: FAQ
 
