@@ -44,10 +44,16 @@
   :group 'tool
   :link '(url-link :tag "Repository" "https://github.com/jcs-elpa/company-emojify"))
 
-(defcustom company-emojify-display 'unicode
+(defcustom company-emojify-annotation 'image
   "Option to display emoji in annotation."
-  :type '(choice (const :tag "Display with unicode" unicode)
+  :type '(choice (const :tag "Don't display" nil)
+                 (const :tag "Display with unicode" unicode)
                  (const :tag "Display with image" image))
+  :group 'company-emojify)
+
+(defcustom company-emojify-document t
+  "If non-nil, display emoji information."
+  :type 'boolean
   :group 'company-emojify)
 
 ;;
@@ -56,7 +62,7 @@
 
 (defun company-emojify--display-image-p ()
   "Return non-nil, if we can display image."
-  (and (display-graphic-p) (eq company-emojify-display 'image)))
+  (and (display-graphic-p) (eq company-emojify-annotation 'image)))
 
 (defun company-emojify--display-image (file selected)
   "Display emoji icon in annotation.
@@ -96,23 +102,34 @@ is the selected one."
       (propertize "-" 'display spec))))
 
 (defun company-emojify--annotation (candidate)
-  "Return annotation for completion CANDIDATE."
-  (let* ((display-with-image (company-emojify--display-image-p))
-         (type (if display-with-image "image" "unicode"))
-         (data (emojify-get-emoji candidate))
-         (display (when (hash-table-p data) (ht-get data type)))
-         (selected (equal (nth company-selection company-candidates) candidate)))
-    (if display
-        (if display-with-image
-            (or (company-emojify--display-image display selected) "")
-          display)
-      "")))
+  "Return annotation for CANDIDATE."
+  (when company-emojify-annotation
+    (let* ((display-with-image (company-emojify--display-image-p))
+           (type (if display-with-image "image" "unicode"))
+           (data (emojify-get-emoji candidate))
+           (display (when (hash-table-p data) (ht-get data type)))
+           (selected (equal (nth company-selection company-candidates) candidate)))
+      (if display
+          (if display-with-image
+              (or (company-emojify--display-image display selected) "")
+            display)
+        ""))))
 
 (defun company-emojify--candidates ()
   "Return a list of valid candidates."
   (let ((user (when (hash-table-p emojify--user-emojis) (ht-keys emojify--user-emojis)))
         (const (when (hash-table-p emojify-emojis) (ht-keys emojify-emojis))))
     (append user const)))
+
+(defun company-emojify--doc-buffer (candidate)
+  "Return document for CANDIDATE."
+  (company-doc-buffer
+   (if company-emojify-document
+       (let* ((data (emojify-get-emoji candidate))
+              (name (ht-get data "name"))
+              (style (ht-get data "style")))
+         (format "%s (%s)" name style))
+     "")))
 
 ;;
 ;; (@* "Entry" )
@@ -129,7 +146,8 @@ Arguments COMMAND, ARG and IGNORED are standard arguments from `company-mode`."
     (interactive (company-begin-backend 'company-emojify))
     (prefix (company-grab "\:[a-zA-Z0-9-_+]*"))
     (candidates (company-emojify--candidates))
-    (annotation (company-emojify--annotation arg))))
+    (annotation (company-emojify--annotation arg))
+    (doc-buffer (company-emojify--doc-buffer arg))))
 
 (provide 'company-emojify)
 ;;; company-emojify.el ends here
