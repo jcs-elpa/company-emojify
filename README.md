@@ -33,7 +33,7 @@ Notice, it will display `unicode` if you are in non-graphical environment (termi
 
 `company-emoji` is more lightweight and does not require [emojify](https://github.com/iqbalansari/emacs-emojify).
 However, it does not support display with emoji images. `company-emoji` would work
-on its own since it declares its emoji list in [company-emoji-let.el](https://github.com/dunn/company-emoji/blob/trunk/company-emoji-list.el).
+on its own since it declares its emoji list in [company-emoji-list.el](https://github.com/dunn/company-emoji/blob/trunk/company-emoji-list.el).
 This package reuses the code from `emojify` hence this would be a better
 choice if you already have `emojify` installed.
 
