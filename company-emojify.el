@@ -50,6 +50,10 @@
                  (const :tag "Display with image" image))
   :group 'company-emojify)
 
+;;
+;; (@* "Core" )
+;;
+
 (defun company-emojify--display-image-p ()
   "Return non-nil, if we can display image."
   (and (display-graphic-p) (eq company-emojify-display 'image)))
@@ -113,6 +117,10 @@ save some performance."
         (const (when (hash-table-p emojify-emojis) (ht-keys emojify-emojis))))
     (cl-remove-if-not (lambda (c) (string-prefix-p prefix c))
                       (append user const))))
+
+;;
+;; (@* "Entry" )
+;;
 
 ;;;###autoload
 (defun company-emojify (command &optional arg &rest ignored)
