@@ -13,7 +13,7 @@
 
 ```el
 (require 'company-emojify)
-(add-to-list 'company-backends 'company-emoji)
+(add-to-list 'company-backends 'company-emojify)
 ```
 
 ## :hammer: Configuration
