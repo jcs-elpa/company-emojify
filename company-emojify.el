@@ -32,6 +32,8 @@
 
 ;;; Code:
 
+(require 'subr-x)
+
 (require 'company)
 (require 'emojify)
 (require 'ht)
@@ -52,42 +54,51 @@
   "Return non-nil, if we can display image."
   (and (display-graphic-p) (eq company-emojify-display 'image)))
 
+(defun company-emojify--display-image (file selected)
+  "Display emoji icon in annotation."
+  (when-let* ((image-file (expand-file-name file (emojify-image-dir)))
+              (_exists (file-exists-p image-file))
+              (bkg (face-attribute (if selected
+                                       'company-tooltip-selection
+                                     'company-tooltip)
+                                   :background))
+              (dfw (default-font-width))
+              (icon-size (cond
+                          ((integerp company-icon-size)
+                           company-icon-size)
+                          ;; XXX: Also consider smooth scaling, e.g. using
+                          ;; (aref (font-info (face-font 'default)) 2)
+                          ((and (consp company-icon-size)
+                                (eq 'auto-scale (car company-icon-size)))
+                           (let ((base-size (cdr company-icon-size))
+                                 (dfh (default-font-height)))
+                             (min
+                              (if (> dfh (* 2 base-size))
+                                  (* 2 base-size)
+                                base-size)
+                              (* 2 dfw))))))
+              (spec (list 'image
+                          :file image-file
+                          :type 'png
+                          :width icon-size
+                          :height icon-size
+                          :ascent 'center
+                          :background (unless (eq bkg 'unspecified)
+                                        bkg))))
+    (propertize "-" 'display spec)))
+
 (defun company-emojify--annotation (candidate)
   "Return annotation for completion CANDIDATE."
   (let* ((display-with-image (company-emojify--display-image-p))
          (type (if display-with-image "image" "unicode"))
-         (display (ht-get (emojify-get-emoji candidate) type)))
-    (if display-with-image
-        (let* ((selected (equal (nth company-selection company-candidates) candidate))
-               (bkg (face-attribute (if selected
-                                        'company-tooltip-selection
-                                      'company-tooltip)
-                                    :background))
-               (dfw (default-font-width))
-               (icon-size (cond
-                           ((integerp company-icon-size)
-                            company-icon-size)
-                           ;; XXX: Also consider smooth scaling, e.g. using
-                           ;; (aref (font-info (face-font 'default)) 2)
-                           ((and (consp company-icon-size)
-                                 (eq 'auto-scale (car company-icon-size)))
-                            (let ((base-size (cdr company-icon-size))
-                                  (dfh (default-font-height)))
-                              (min
-                               (if (> dfh (* 2 base-size))
-                                   (* 2 base-size)
-                                 base-size)
-                               (* 2 dfw))))))
-               (spec (list 'image
-                           :file (expand-file-name display (emojify-image-dir))
-                           :type 'png
-                           :width icon-size
-                           :height icon-size
-                           :ascent 'center
-                           :background (unless (eq bkg 'unspecified)
-                                         bkg))))
-          (propertize "-" 'display spec))
-      display)))
+         (data (emojify-get-emoji candidate))
+         (display (when (hash-table-p data) (ht-get data type)))
+         (selected (equal (nth company-selection company-candidates) candidate)))
+    (if display
+        (if display-with-image
+            (or (company-emojify--display-image display selected) "")
+          display)
+      "")))
 
 (defun company-emojify--candidates (prefix)
   "Return a list of valid candidates.
@@ -96,9 +107,7 @@ Argument PREFIX is used to eliminate possible candidates hence this should
 save some performance."
   (let ((user (when (hash-table-p emojify--user-emojis) (ht-keys emojify--user-emojis)))
         (const (when (hash-table-p emojify-emojis) (ht-keys emojify-emojis))))
-    (cl-remove-if-not
-     (lambda (c) (string-prefix-p prefix c))
-     (append user const))))
+    (append user const)))
 
 ;;;###autoload
 (defun company-emojify (command &optional arg &rest ignored)
@@ -106,11 +115,10 @@ save some performance."
 
 Arguments COMMAND, ARG and IGNORED are standard arguments from `company-mode`."
   (interactive (list 'interactive))
+  (emojify-create-emojify-emojis)
   (cl-case command
     (interactive (company-begin-backend 'company-emojify))
-    (prefix
-     (emojify-create-emojify-emojis)
-     (company-grab "\:[a-zA-Z0-9-_+]*"))
+    (prefix (company-grab "\:[a-zA-Z0-9-_+]*"))
     (candidates (company-emojify--candidates arg))
     (annotation (company-emojify--annotation arg))))
 
