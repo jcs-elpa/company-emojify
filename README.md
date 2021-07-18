@@ -20,8 +20,15 @@
 
 #### `company-emojify-emoji-styles`
 
-Display these emoji styles as candidates. See [emojify-emoji-styles]()
-for more information.
+Display these emoji styles as candidates, default to `'(ascii unicode github)`.
+
+If you want to limit to a certain style, you can do the following
+
+```el
+(setq company-emojify-emoji-styles '(github))  ; Show only the `github` style
+```
+
+See [emojify-emoji-styles]() for more information.
 
 #### `company-emojify-annotation`
 
