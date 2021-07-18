@@ -51,6 +51,14 @@
                  (const :tag "Display with image" image))
   :group 'company-emojify)
 
+(defcustom company-emojify-emoji-styles emojify-emoji-styles
+  "Styles same with variable `emojify-emoji-styles' but limit to this package."
+  :type '(set
+          (const :tag "Display only ascii emojis" ascii)
+          (const :tag "Display only github emojis" github)
+          (const :tag "Display only unicode codepoints" unicode))
+  :group 'company-emojify)
+
 (defcustom company-emojify-document t
   "If non-nil, display emoji information."
   :type 'boolean
@@ -119,7 +127,12 @@ is the selected one."
   "Return a list of valid candidates."
   (let ((user (when (hash-table-p emojify--user-emojis) (ht-keys emojify--user-emojis)))
         (const (when (hash-table-p emojify-emojis) (ht-keys emojify-emojis))))
-    (append user const)))
+    (cl-remove-if-not
+     (lambda (candidate)
+       (let* ((data (emojify-get-emoji candidate))
+              (style (ht-get data "style")))
+         (memq (intern style) company-emojify-emoji-styles)))
+     (append user const))))
 
 (defun company-emojify--doc-buffer (candidate)
   "Return document for CANDIDATE."
