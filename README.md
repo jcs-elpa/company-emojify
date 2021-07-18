@@ -18,6 +18,11 @@
 
 ## :hammer: Configuration
 
+#### `company-emojify-emoji-styles`
+
+Display these emoji styles as candidates. See [emojify-emoji-styles]()
+for more information.
+
 #### `company-emojify-annotation`
 
 Option to display emoji in annotation. It can either be one of the following values,
