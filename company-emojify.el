@@ -44,19 +44,19 @@
   :group 'tool
   :link '(url-link :tag "Repository" "https://github.com/jcs-elpa/company-emojify"))
 
-(defcustom company-emojify-annotation 'image
-  "Option to display emoji in annotation."
-  :type '(choice (const :tag "Don't display" nil)
-                 (const :tag "Display with unicode" unicode)
-                 (const :tag "Display with image" image))
-  :group 'company-emojify)
-
 (defcustom company-emojify-emoji-styles emojify-emoji-styles
   "Styles same with variable `emojify-emoji-styles' but limit to this package."
   :type '(set
           (const :tag "Display only ascii emojis" ascii)
           (const :tag "Display only github emojis" github)
           (const :tag "Display only unicode codepoints" unicode))
+  :group 'company-emojify)
+
+(defcustom company-emojify-annotation 'image
+  "Option to display emoji in annotation."
+  :type '(choice (const :tag "Don't display" nil)
+                 (const :tag "Display with unicode" unicode)
+                 (const :tag "Display with image" image))
   :group 'company-emojify)
 
 (defcustom company-emojify-document t
