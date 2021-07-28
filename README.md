@@ -58,8 +58,8 @@ choice if you already have `emojify` installed.
 
 #### :dizzy: How to add more emoji?
 
-Unlike `company-emoji` has specify it's own emoji list. Please consider contribute to the
-upstream package `emojify`.
+Unlike `company-emoji` has specify it's own emoji list. Since we rely on
+package `emojify`, please consider contribute to the upstream.
 
 ## Contribution
 
