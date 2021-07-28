@@ -56,7 +56,7 @@ on its own since it declares its emoji list in [company-emoji-list.el](https://g
 This package reuses the code from `emojify` hence this would be a better
 choice if you already have `emojify` installed.
 
-#### :dizzy: How to add more emoji? :confuse:
+#### :dizzy: How to add more emoji? :confused:
 
 Unlike `company-emoji` has specify it's own list. Please consider contribute to the
 upstream package `emojify`.
