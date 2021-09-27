@@ -1,10 +1,11 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![MELPA](https://melpa.org/packages/company-emojify-badge.svg)](https://melpa.org/#/company-emojify)
 [![MELPA Stable](https://stable.melpa.org/packages/company-emojify-badge.svg)](https://stable.melpa.org/#/company-emojify)
-[![CI](https://github.com/jcs-elpa/company-emojify/actions/workflows/test.yml/badge.svg)](https://github.com/jcs-elpa/company-emojify/actions/workflows/test.yml)
 
 # company-emojify
 > Company completion for Emojify
+
+[![CI](https://github.com/jcs-elpa/company-emojify/actions/workflows/test.yml/badge.svg)](https://github.com/jcs-elpa/company-emojify/actions/workflows/test.yml)
 
 ## Features
 
