@@ -2,6 +2,9 @@
          "0.1.0"
          "Company completion for Emojify")
 
+(website-url "https://github.com/jcs-elpa/company-emojify")
+(keywords "emoji" "company" "emojify")
+
 (package-file "company-emojify.el")
 
 (source "melpa")

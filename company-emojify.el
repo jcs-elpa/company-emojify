@@ -4,11 +4,10 @@
 ;; Created date 2021-07-16 13:41:28
 
 ;; Author: Shen, Jen-Chieh <jcs090218@gmail.com>
-;; Description: Company completion for Emojify
-;; Keyword: emoji company emojify
+;; URL: https://github.com/jcs-elpa/company-emojify
 ;; Version: 0.1.0
 ;; Package-Requires: ((emacs "26.1") (company "0.8.0") (emojify "1.2.1") (ht "2.0"))
-;; URL: https://github.com/jcs-elpa/company-emojify
+;; Keywords: emoji company emojify
 
 ;; This file is NOT part of GNU Emacs.
 
