@@ -3,7 +3,7 @@
          "Company completion for Emojify")
 
 (website-url "https://github.com/jcs-elpa/company-emojify")
-(keywords "emoji" "company" "emojify")
+(keywords "convenience" "emoji" "company" "emojify")
 
 (package-file "company-emojify.el")
 
