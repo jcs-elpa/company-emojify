@@ -7,7 +7,7 @@
 ;; URL: https://github.com/jcs-elpa/company-emojify
 ;; Version: 0.1.0
 ;; Package-Requires: ((emacs "26.1") (company "0.8.0") (emojify "1.2.1") (ht "2.0"))
-;; Keywords: emoji company emojify
+;; Keywords: convenience emoji company emojify
 
 ;; This file is NOT part of GNU Emacs.
 
