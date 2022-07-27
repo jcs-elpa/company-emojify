@@ -21,11 +21,11 @@
 
 ## 🔨 Configuration
 
-#### `company-emojify-insert-unicode`
+#### 🔍 `company-emojify-insert-unicode`
 
 Replace the `:shortcode:` with the real Unicode character upon completion.
 
-#### `company-emojify-emoji-styles`
+#### 🔍 `company-emojify-emoji-styles`
 
 Display these emoji styles as candidates, default to `'(ascii unicode github)`.
 
@@ -37,7 +37,7 @@ If you want to limit to a certain style, you can do the following
 
 See [emojify-emoji-styles]() for more information.
 
-#### `company-emojify-annotation`
+#### 🔍 `company-emojify-annotation`
 
 Option to display emoji in annotation. It can either be one of the following values,
 
@@ -47,7 +47,7 @@ Option to display emoji in annotation. It can either be one of the following val
 
 Notice, it will display `unicode` if you are in non-graphical environment (terminal).
 
-#### `company-emojify-document`
+#### 🔍 `company-emojify-document`
 
 Display information about the emoji in document buffer, default to `t`.
 
