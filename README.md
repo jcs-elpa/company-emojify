@@ -7,7 +7,25 @@
 
 [![CI](https://github.com/jcs-elpa/company-emojify/actions/workflows/test.yml/badge.svg)](https://github.com/jcs-elpa/company-emojify/actions/workflows/test.yml)
 
-## Features
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
+**Table of Contents**
+
+- [company-emojify](#company-emojify)
+    - [🏆 Features](#🏆-features)
+    - [💾 Quickstart](#💾-quickstart)
+    - [🔨 Configuration](#🔨-configuration)
+        - [-](#-)
+        - [🔍 `company-emojify-emoji-styles`](#🔍-company-emojify-emoji-styles)
+        - [🔍 `company-emojify-annotation`](#🔍-company-emojify-annotation)
+        - [🔍 `company-emojify-document`](#🔍-company-emojify-document)
+    - [❓ FAQ](#❓-faq)
+        - [-](#--1)
+        - [💫 How to add more emoji?](#💫-how-to-add-more-emoji)
+    - [Contribute](#contribute)
+
+<!-- markdown-toc end -->
+
+## 🏆 Features
 
 * Uses [emojify](https://github.com/iqbalansari/emacs-emojify)
 * Support both `unicode` and `image` displays
