@@ -19,7 +19,7 @@
         - [🔍 `company-emojify-annotation`](#🔍-company-emojify-annotation)
         - [🔍 `company-emojify-document`](#🔍-company-emojify-document)
     - [❓ FAQ](#❓-faq)
-        - [💫 How is this different from [company-emoji](https://github.com/dunn/company-emoji)?](#--1)
+        - [💫 How is this different from `company-emoji`?](#--1)
         - [💫 How to add more emoji?](#💫-how-to-add-more-emoji)
     - [Contribute](#contribute)
 
