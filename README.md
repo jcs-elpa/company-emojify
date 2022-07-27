@@ -21,6 +21,10 @@
 
 ## 🔨 Configuration
 
+#### `company-emojify-insert-unicode`
+
+Replace the `:shortcode:` with the real Unicode character upon completion.
+
 #### `company-emojify-emoji-styles`
 
 Display these emoji styles as candidates, default to `'(ascii unicode github)`.

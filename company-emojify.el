@@ -43,6 +43,11 @@
   :group 'tool
   :link '(url-link :tag "Repository" "https://github.com/jcs-elpa/company-emojify"))
 
+(defcustom company-emojify-insert-unicode t
+  "Replace the :shortcode: with the real Unicode character upon completion."
+  :type 'boolean
+  :group 'company-emojify)
+
 (defcustom company-emojify-emoji-styles emojify-emoji-styles
   "Styles same with variable `emojify-emoji-styles' but limit to this package."
   :type '(set
@@ -159,7 +164,15 @@ Arguments COMMAND, ARG and IGNORED are standard arguments from `company-mode`."
     (prefix (company-grab "\:[a-zA-Z0-9-_+]*"))
     (candidates (company-emojify--candidates))
     (annotation (company-emojify--annotation arg))
-    (doc-buffer (company-emojify--doc-buffer arg))))
+    (doc-buffer (company-emojify--doc-buffer arg))
+    (post-completion
+     (kill-region (- (point) (length arg) 1) (point))
+     (if company-emojify-insert-unicode
+         (let* ((data (emojify-get-emoji arg))
+                (type "unicode")
+                (display (when (hash-table-p data) (ht-get data type))))
+           (insert display))
+       (insert arg)))))
 
 (provide 'company-emojify)
 ;;; company-emojify.el ends here
