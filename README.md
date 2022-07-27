@@ -12,14 +12,14 @@
 * Uses [emojify](https://github.com/iqbalansari/emacs-emojify)
 * Support both `unicode` and `image` displays
 
-## :floppy_disk: Quickstart
+## 💾 Quickstart
 
 ```el
 (require 'company-emojify)
 (add-to-list 'company-backends 'company-emojify)
 ```
 
-## :hammer: Configuration
+## 🔨 Configuration
 
 #### `company-emojify-emoji-styles`
 
@@ -47,9 +47,9 @@ Notice, it will display `unicode` if you are in non-graphical environment (termi
 
 Display information about the emoji in document buffer, default to `t`.
 
-## :question: FAQ
+## ❓ FAQ
 
-#### :dizzy: How is this different from [company-emoji](https://github.com/dunn/company-emoji)?
+#### 💫 How is this different from [company-emoji](https://github.com/dunn/company-emoji)?
 
 `company-emoji` is more lightweight and does not require [emojify](https://github.com/iqbalansari/emacs-emojify).
 However, it does not support display with emoji images. `company-emoji` would work
@@ -57,7 +57,7 @@ on its own since it declares its emoji list in [company-emoji-list.el](https://g
 This package reuses the code from `emojify` hence this would be a better
 choice if you already have `emojify` installed.
 
-#### :dizzy: How to add more emoji?
+#### 💫 How to add more emoji?
 
 Unlike `company-emoji` has specify it's own emoji list. Since we rely on
 package `emojify`, please consider contribute to the upstream.
