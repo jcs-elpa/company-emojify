@@ -166,7 +166,7 @@ Arguments COMMAND, ARG and IGNORED are standard arguments from `company-mode`."
     (annotation (company-emojify--annotation arg))
     (doc-buffer (company-emojify--doc-buffer arg))
     (post-completion
-     (kill-region (- (point) (length arg) 1) (point))
+     (kill-region (- (point) (length arg)) (point))
      (if company-emojify-insert-unicode
          (let* ((data (emojify-get-emoji arg))
                 (type "unicode")
