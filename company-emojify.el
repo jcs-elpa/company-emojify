@@ -1,6 +1,6 @@
 ;;; company-emojify.el --- Company completion for Emojify  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2021-2023  Shen, Jen-Chieh
+;; Copyright (C) 2021-2024  Shen, Jen-Chieh
 ;; Created date 2021-07-16 13:41:28
 
 ;; Author: Shen, Jen-Chieh <jcs090218@gmail.com>
